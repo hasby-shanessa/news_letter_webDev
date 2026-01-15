@@ -31,7 +31,7 @@ function hideModal() {
 
 form.addEventListener('submit', function(event){
     event.preventDefault();
-    const email = emailInput.ariaValueMax.trim();
+    const email = emailInput.value.trim();
 
     if (email === ''){
         showError();
