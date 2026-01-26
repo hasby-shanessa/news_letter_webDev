@@ -6,44 +6,66 @@ const confirmEmail = document.getElementById('confirm-email');
 const dismissBtn = document.getElementById('dismiss-btn');
 
 function isValidEmail(email) {
+
     if (!email.includes('@')) {
         return false;
     }
-    
+
     const parts = email.split('@');
-    
+
     if (parts.length !== 2) {
         return false;
     }
-    
-    const beforeAt = parts[0];
-    const afterAt = parts[1];
-    
-    if (beforeAt.length < 1) {
+
+    const localPart = parts[0];
+    const domainPart = parts[1];
+
+    if (localPart.length < 1) {
         return false;
     }
-    
-    if (!afterAt.includes('.')) {
+
+    const validLocalChars = /^[a-zA-Z0-9._-]+$/;
+    if (!validLocalChars.test(localPart)) {
         return false;
     }
-    
-    const domainParts = afterAt.split('.');
-    
+
+    if (localPart.startsWith('.') || localPart.endsWith('.')) {
+        return false;
+    }
+
+    if (!domainPart.includes('.')) {
+        return false;
+    }
+
+    const domainParts = domainPart.split('.');
+
     if (domainParts.length < 2) {
         return false;
     }
-    
+
+    const validDomainChars = /^[a-zA-Z0-9-]+$/;
+    for (let i = 0; i < domainParts.length; i++) {
+        if (!validDomainChars.test(domainParts[i])) {
+            return false;
+        }
+    }
+
     const domain = domainParts[0];
     const extension = domainParts[domainParts.length - 1];
-    
+
     if (domain.length < 2) {
         return false;
     }
-    
+
     if (extension.length < 2) {
         return false;
     }
-    
+
+    const lettersOnly = /^[a-zA-Z]+$/;
+    if (!lettersOnly.test(extension)) {
+        return false;
+    }
+
     return true;
 }
 
@@ -66,19 +88,19 @@ function hideModal() {
 
 form.addEventListener('submit', function(event) {
     event.preventDefault();
-    
+
     const email = emailInput.value.trim();
-    
+
     if (email === '') {
         showError();
         return;
     }
-    
+
     if (!isValidEmail(email)) {
         showError();
         return;
     }
-    
+
     hideError();
     showModal(email);
 });
