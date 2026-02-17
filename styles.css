@@ -135,7 +135,9 @@ body {
     color: var(--error);
 }
 
-.submit-btn {
+/* Button Styles */
+.submit-btn,
+.dismiss-btn {
     width: 100%;
     padding: 18px;
     font-size: 16px;
@@ -146,12 +148,14 @@ body {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    transition: all 0.3s ease;
 }
 
-.submit-btn:hover {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
-    box-shadow: 0 12px 24px rgba(255, 98, 87, 0.4);
+/* Button Hover - Matches Figma Design */
+.submit-btn:hover,
+.dismiss-btn:hover {
+    background: linear-gradient(90deg, #ff5478 0%, #ff6a5b 100%);
+    box-shadow: 0 16px 32px rgba(255, 84, 120, 0.6);
 }
 
 .illustration {
@@ -200,6 +204,10 @@ body {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
+.modal-body {
+    /* Container for icon, heading, and text */
+}
+
 .success-icon {
     width: 64px;
     height: 64px;
@@ -225,26 +233,9 @@ body {
     font-weight: 700;
 }
 
-.dismiss-btn {
-    width: 100%;
-    padding: 18px;
-    font-size: 16px;
-    font-weight: 700;
-    font-family: inherit;
-    color: white;
-    background-color: var(--primary);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
-}
-
-.dismiss-btn:hover {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
-    box-shadow: 0 12px 24px rgba(255, 98, 87, 0.4);
-}
-
-/* Mobile - 375px  */
+/* ================================
+   Mobile - 375px (iPhone SE)
+   ================================ */
 @media (max-width: 768px) {
     body {
         padding: 0;
